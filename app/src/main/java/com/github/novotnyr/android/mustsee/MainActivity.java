@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         ).build();
 
         placeListAdapter.setSelectionTracker(selectionTracker);
+
+        selectionTracker.addObserver(new PlaceSelectionObserver(this, this.selectionTracker));
     }
 
     @Override
