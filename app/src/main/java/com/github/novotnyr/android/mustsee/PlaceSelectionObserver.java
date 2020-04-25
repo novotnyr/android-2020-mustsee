@@ -22,9 +22,10 @@ public class PlaceSelectionObserver extends SelectionTracker.SelectionObserver<L
     @Override
     public void onSelectionChanged() {
         if (selectionTracker.hasSelection()) {
-            activity.setTitle("Selected: " + selectionTracker.getSelection().size());
-        } else {
-            activity.setTitle(R.string.app_name);
+            if (actionMode == null) {
+                actionMode = activity.startSupportActionMode(this);
+            }
+            actionMode.setTitle("Selected: " + selectionTracker.getSelection().size());
         }
     }
 
