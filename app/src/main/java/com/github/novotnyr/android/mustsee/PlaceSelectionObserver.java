@@ -46,6 +46,7 @@ public class PlaceSelectionObserver extends SelectionTracker.SelectionObserver<L
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-
+        selectionTracker.clearSelection();
+        actionMode = null;
     }
 }
