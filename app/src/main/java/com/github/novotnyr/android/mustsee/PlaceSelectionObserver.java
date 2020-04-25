@@ -31,7 +31,8 @@ public class PlaceSelectionObserver extends SelectionTracker.SelectionObserver<L
 
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-        return false;
+        mode.getMenuInflater().inflate(R.menu.place_selection_cab, menu);
+        return true;
     }
 
     @Override
