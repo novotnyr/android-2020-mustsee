@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 new PlaceDetailsLookup(placeRecyclerView),
                 StorageStrategy.createLongStorage()
         ).build();
+
+        placeListAdapter.setSelectionTracker(selectionTracker);
     }
 
     private List<Place> getInitialPlaces() {
