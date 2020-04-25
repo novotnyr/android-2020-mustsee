@@ -23,7 +23,8 @@ public class PlaceListAdapter extends ListAdapter<Place, PlaceViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PlaceViewHolder viewHolder, int position) {
         Place place = getItem(position);
-        viewHolder.bind(place, false);
+        boolean isSelected = selectionTracker.isSelected(place.getId());
+        viewHolder.bind(place, isSelected);
     }
 
     @Override
