@@ -2,6 +2,8 @@ package com.github.novotnyr.android.mustsee;
 
 import android.view.*;
 
+import java.util.Iterator;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.selection.SelectionTracker;
@@ -42,7 +44,16 @@ public class PlaceSelectionObserver extends SelectionTracker.SelectionObserver<L
 
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        if (item.getItemId() == R.id.placeDeleteMenuItem) {
+            onDeleteItems(this.selectionTracker.getSelection().iterator());
+            mode.finish();
+            return true;
+        }
         return false;
+    }
+
+    protected void onDeleteItems(Iterator<Long> selection) {
+        // do nothing
     }
 
     @Override
