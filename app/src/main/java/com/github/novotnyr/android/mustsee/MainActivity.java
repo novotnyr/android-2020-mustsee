@@ -1,13 +1,13 @@
 package com.github.novotnyr.android.mustsee;
 
+import android.os.Bundle;
+
+import java.util.*;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.selection.*;
 import androidx.recyclerview.widget.*;
-
-import android.os.Bundle;
-
-import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView placeRecyclerView;
@@ -30,14 +30,19 @@ public class MainActivity extends AppCompatActivity {
         selectionTracker = new SelectionTracker.Builder<Long>(
                 "places-selection",
                 placeRecyclerView,
-                new StableIdKeyProvider(placeRecyclerView),
+                new PlaceItemKeyProvider(placeRecyclerView),
                 new PlaceDetailsLookup(placeRecyclerView),
                 StorageStrategy.createLongStorage()
         ).build();
 
         placeListAdapter.setSelectionTracker(selectionTracker);
 
-        selectionTracker.addObserver(new PlaceSelectionObserver(this, this.selectionTracker));
+        selectionTracker.addObserver(new PlaceSelectionObserver(this, this.selectionTracker) {
+            @Override
+            protected void onDeleteItems(Iterator<Long> selection) {
+                placeListAdapter.removePlaces(selection);
+            }
+        });
     }
 
     @Override
